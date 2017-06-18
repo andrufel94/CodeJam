@@ -28,7 +28,7 @@ def find_bathrooms(case):
     list_bathrooms = [0] * int(N)
     for i in range(0, K):
         list_bathrooms = insert_person(list_bathrooms)
-        print(list_bathrooms)
+        print()
     list_r = get_empty_r(list_bathrooms)
     list_l = get_empty_l(list_bathrooms)
     return str(max(get_max(list_l, list_r))) + " " + str(max(get_min(list_l, list_r)))
@@ -100,12 +100,29 @@ def get_max(list_l, list_r):
         else:
             list_max[i] = list_r[i]
     return list_max
+
+def max_min(n):
+    return ((n+1)//2, n//2)
+
+def bathroom_stalls(case):
+    list_parameters = case.split(' ')
+    N = int(list_parameters[0])
+    K = int(list_parameters[1])
+    while K > 1:
+        M, m = max_min(N-1)
+        K -= 1
+        print("K:"+str(K % 2))
+        N = M if K % 2 else m
+        K = (K+1)//2
+        print(str(N) + "-" + str(K))
+            
+    return max_min(N-1)
     
 # endregion
 
 # region main
 if __name__ == "__main__":
     #init_std_output("C-small-practice-1.out")
-    func = find_bathrooms
+    func = bathroom_stalls
     read_all_case("C-small-practice-1.in", func)
 # endregion
